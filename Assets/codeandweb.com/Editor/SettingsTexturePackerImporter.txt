@@ -1,0 +1,17 @@
+version: 2
+tpsheetFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Spritesheets/largebrownasteroid.tpsheet
+- Assets/Spritesheets/largegrayasteroid.tpsheet
+- Assets/Spritesheets/largeredasteroid.tpsheet
+textureFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Spritesheets/largebrownasteroid.png
+- Assets/Spritesheets/largegrayasteroid.png
+- Assets/Spritesheets/largeredasteroid.png
+normalmapFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+enableDebugOutput: 0
