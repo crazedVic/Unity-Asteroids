@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     // https://docs.unity3d.com/Packages/com.unity.inputsystem@1.4/manual/Actions.html
     // https://gamedev.soarhap.com/unity-new-input-system/#handling-keyboard-input
     // https://unitycodemonkey.com/video.php?v=caNvN4rRrh0
-    InputAction move, shoot;
+   
 
     private void Awake()
     {
@@ -18,18 +18,28 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var playerInput = GetComponent<PlayerInput>();
-        move = playerInput.actions["Move"];
-        shoot = playerInput.actions["Shoot"];
     }
 
     // Update is called once per frame
     void Update()
     {
-       // var m = move.ReadValue();
-        var f = shoot.ReadValue<float>();
-       // Debug.Log(m);
-        Debug.Log(f);
+
+
+    }
+
+    public void OnShoot()
+    {
+        Debug.Log("shoot");
+    }
+
+    public void OnTurn(InputValue value)
+    {
+        Debug.Log(value.Get<float>());
+    }
+
+    public void OnMove(InputValue value)
+    {
+        Debug.Log(value.Get<float>());
     }
 
     private void FixedUpdate()
