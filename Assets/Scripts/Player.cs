@@ -14,10 +14,15 @@ public class Player : MonoBehaviour
     float moveDirection = 0f;
 
     public float turnSpeed = 100.0f;
+    public float bulletSpeed = 100.0f;
+
     Rigidbody2D rb;
 
     float cornerOffset = 1.0f;
     float teleportOffset = 0.2f;
+
+    [SerializeField]
+    GameObject bullet;
 
     public BoxCollider2D boundsCollider; //will be set by GameManager when prefab instantiate
 
@@ -59,6 +64,8 @@ public class Player : MonoBehaviour
     public void OnShoot()
     {
         Debug.Log("shoot");
+        GameObject bulletInstance = Instantiate(bullet);
+        bulletInstance.GetComponent<Rigidbody2D>().AddForce(rb.transform.up * bulletSpeed);
     }
 
     public void OnTurn(InputValue value)
