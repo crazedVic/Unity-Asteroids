@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 81482133}
   m_Layer: 0
   m_Name: ScreenBounds
-  m_TagString: Untagged
+  m_TagString: screen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 1248977362}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb383d433e187b499e68bd79a1d0649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 250
 --- !u!114 &1248977362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: f7e6a174fa3905e4f8eacfaa8f197286, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -488,6 +489,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b7e63c50-b10b-4d22-b45c-658f42c0c826
     m_ActionName: Player/Shoot[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 61c060fc-20de-470e-ad02-2293a0e73734
+    m_ActionName: Player/Move[/Keyboard/s,/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

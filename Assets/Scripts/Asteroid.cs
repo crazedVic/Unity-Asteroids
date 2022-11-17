@@ -7,10 +7,11 @@ public class Asteroid : MonoBehaviour
 
     Rigidbody2D rb; //references the rigidbody attached to the asteroid
     Collider2D myCollider; //references the circle collider attached to the asteroid
+    SpriteRenderer sr; // references the image being used by the asteroid
 
     [SerializeField]
     [Range(50.0f, 200.0f)]
-    float speed = 120.0f;
+    float baseSpeed = 70.0f;
 
     float cornerOffset = 1.0f;
     float teleportOffset = 0.2f;
@@ -24,15 +25,15 @@ public class Asteroid : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
-        ScreenBounds.ExitTriggerFired += TestColliderForWrapping;
-
+        sr = GetComponent<SpriteRenderer>();
     }
+
     // Start is called before the first frame update
     private void Start()
     {
-        GetMoving();
+        GetMoving(baseSpeed);
     }
-    public void GetMoving()
+    public void GetMoving(float speed)
     {
         // set size
         transform.localScale = new Vector2(size, size);
@@ -45,17 +46,16 @@ public class Asteroid : MonoBehaviour
         rb.AddRelativeForce(Random.onUnitSphere * speed);
     }
 
-    public void TestColliderForWrapping(Collider2D collider)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (GameObject.ReferenceEquals(myCollider, collider))
-        {
+        if (collision.CompareTag("screen"))
             transform.position = CalculateWrappedPosition(transform.position);
-        }
-       
     }
 
-    public void OnBulletHit()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("bullet"))
+            Debug.Log("hit by Bullet");
         // when hit by a bullet, the asteroid will despawn
         // and 3 new asteroids will spawn unless already at smallest size (0.5f)
     }

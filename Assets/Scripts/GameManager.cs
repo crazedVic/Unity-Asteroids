@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     int asteroidBaseCount = 2;
 
     [SerializeField]
+    [Range(50.0f, 200.0f)]
+    float asteroidBaseSpeed = 70.0f;
+
+    [SerializeField]
     GameObject asteroidsContainer; //empty container that will hold the spawned asteroids
 
     [SerializeField]
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour
             // instantiate new asteroid inside asteroidContainer
             GameObject asteroid = Instantiate(asteroids[prefabIndex]);
             asteroid.GetComponent<Asteroid>().boundsCollider = boundsCollider;
-            asteroid.GetComponent<Asteroid>().GetMoving();
+            asteroid.GetComponent<Asteroid>().GetMoving(asteroidBaseSpeed);
             asteroid.transform.parent = asteroidsContainer.transform;
           
         }

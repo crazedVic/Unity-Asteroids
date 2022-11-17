@@ -122,13 +122,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 1f958bf2e8bf7824f9f491e6f015f763, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &6484499315752907436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 98
-  boxCollider: {fileID: 0}
+  boundsCollider: {fileID: 0}
+  size: 1.5
 --- !u!58 &6484499315752907435
 CircleCollider2D:
   m_ObjectHideFlags: 0
