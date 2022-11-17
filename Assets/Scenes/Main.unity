@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  asteroidBaseSpeed: 70
   asteroidsContainer: {fileID: 1025311393}
   boundsCollider: {fileID: 81482131}
   asteroids:
@@ -456,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 250
+  boundsCollider: {fileID: 81482131}
 --- !u!114 &1248977362
 MonoBehaviour:
   m_ObjectHideFlags: 0
