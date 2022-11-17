@@ -52,7 +52,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Rotate(new Vector3( 0f,0f,turnDirection * turnSpeed * Time.deltaTime));
+        rb.transform.Rotate(new Vector3( 0f,0f,turnDirection * turnSpeed * Time.deltaTime));
+        rb.AddForce(rb.transform.up * moveDirection * turnSpeed*Time.deltaTime);
     }
 
     public void OnShoot()
@@ -73,6 +74,11 @@ public class Player : MonoBehaviour
     public void OnStopTurning(InputValue value)
     {
         turnDirection = 0f;
+    }
+
+    public void OnStopMoving(InputValue value)
+    {
+        moveDirection = 0f;
     }
 
     public Vector2 CalculateWrappedPosition(Vector2 worldPosition)
