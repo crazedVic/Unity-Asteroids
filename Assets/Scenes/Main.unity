@@ -488,13 +488,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb383d433e187b499e68bd79a1d0649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 250
   boundsCollider: {fileID: 81482131}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2420334126308670193, guid: d4a301b28434721489e2c63ac06ddc47, type: 3}
   bulletContainer: {fileID: 4045639}
   bulletSpawner: {fileID: 1528192972}
   bulletCooldown: 0.57
   bulletSpeed: 250
+  turnSpeed: 250
 --- !u!114 &1248977362
 MonoBehaviour:
   m_ObjectHideFlags: 0

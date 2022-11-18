@@ -55,7 +55,10 @@ public class Asteroid : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("bullet"))
-            Debug.Log("hit by Bullet");
+        {
+            Destroy(gameObject);
+
+        }
         // when hit by a bullet, the asteroid will despawn
         // and 3 new asteroids will spawn unless already at smallest size (0.5f)
     }
