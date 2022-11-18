@@ -13,18 +13,36 @@ public class Player : MonoBehaviour
     float turnDirection = 0f;
     float moveDirection = 0f;
 
-    public float turnSpeed = 100.0f;
-    public float bulletSpeed = 100.0f;
-
     Rigidbody2D rb;
 
     float cornerOffset = 1.0f;
     float teleportOffset = 0.2f;
 
-    [SerializeField]
-    GameObject bullet;
-
     public BoxCollider2D boundsCollider; //will be set by GameManager when prefab instantiate
+
+    [Header("Bullet Configuration")]
+    [SerializeField]
+    GameObject bulletPrefab;
+
+    [SerializeField]
+    GameObject bulletContainer;
+
+    [SerializeField]
+    GameObject bulletSpawner;
+
+    [SerializeField]
+    [Range(0.2f, 2.0f)]
+    float bulletCooldown = 0.9f;
+
+    [SerializeField]
+    [Range(150f, 500f)]
+    public float bulletSpeed = 200.0f;
+    float currentBulletCooldown = 0f;
+
+    [Header("Player Configuration")]
+    [SerializeField]
+    [Range(80f, 500f)]
+    public float turnSpeed = 100.0f;
 
     private void Awake()
     {
@@ -34,6 +52,14 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if(currentBulletCooldown > 0)
+        {
+            currentBulletCooldown -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -64,8 +90,16 @@ public class Player : MonoBehaviour
     public void OnShoot()
     {
         Debug.Log("shoot");
-        GameObject bulletInstance = Instantiate(bullet);
-        bulletInstance.GetComponent<Rigidbody2D>().AddForce(rb.transform.up * bulletSpeed);
+        // enforce buttenCooldown
+        if (currentBulletCooldown <= 0)
+        {
+            GameObject bulletInstance = Instantiate(bulletPrefab);
+            bulletInstance.transform.position = bulletSpawner.transform.position;
+            bulletInstance.transform.parent = bulletContainer.transform;
+            bulletInstance.GetComponent<Rigidbody2D>().AddForce(rb.transform.up * bulletSpeed);
+            currentBulletCooldown = bulletCooldown;
+        }
+        
     }
 
     public void OnTurn(InputValue value)
