@@ -31,7 +31,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(asteroidsContainer.transform.childCount <= 0)
+        {
+            level++;
+            SpawnAsteroids();
+        }
     }
 
     void LevelCleared()

@@ -40,8 +40,9 @@ public class Asteroid : MonoBehaviour
         // initially apply a force in a random direction to the asteroid
         float x = Random.Range(boundsCollider.bounds.min.x, boundsCollider.bounds.max.x);
         float y = Random.Range(boundsCollider.bounds.min.y, boundsCollider.bounds.max.y);
+        Vector2 spawnLocation = ScreenBounds.spawnLocations[Random.Range(0, ScreenBounds.spawnLocations.Count)];
 
-        transform.position = new Vector2(x, y);
+        transform.position = spawnLocation;// new Vector2(x, y);
 
         rb.AddRelativeForce(Random.onUnitSphere * speed);
     }
@@ -61,6 +62,7 @@ public class Asteroid : MonoBehaviour
         }
         // when hit by a bullet, the asteroid will despawn
         // and 3 new asteroids will spawn unless already at smallest size (0.5f)
+        // we need to track how many asteroids on the screen, and move to next level if last asteroid dies.
     }
 
     public Vector2 CalculateWrappedPosition(Vector2 worldPosition)
