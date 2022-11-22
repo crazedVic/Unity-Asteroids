@@ -9,17 +9,12 @@ public class Asteroid : MonoBehaviour
     Collider2D myCollider; //references the circle collider attached to the asteroid
     SpriteRenderer sr; // references the image being used by the asteroid
 
-    [SerializeField]
-    [Range(50.0f, 200.0f)]
-    float baseSpeed = 70.0f;
-
     float cornerOffset = 1.0f;
     float teleportOffset = 0.2f;
 
     public BoxCollider2D boundsCollider; //will be set by GameManager when prefab instantiated
 
-    [SerializeField]
-    float size = 1.5f;
+    float size = 0.75f;
 
     private void Awake()
     {
@@ -31,20 +26,20 @@ public class Asteroid : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        GetMoving(baseSpeed);
+
     }
-    public void GetMoving(float speed)
+    public void GetMoving(float speed, Vector2 location)
     {
         // set size
         transform.localScale = new Vector2(size, size);
         // initially apply a force in a random direction to the asteroid
-        float x = Random.Range(boundsCollider.bounds.min.x, boundsCollider.bounds.max.x);
-        float y = Random.Range(boundsCollider.bounds.min.y, boundsCollider.bounds.max.y);
-        Vector2 spawnLocation = ScreenBounds.spawnLocations[Random.Range(0, ScreenBounds.spawnLocations.Count)];
+        // need to ensure spawn points are unique
 
-        transform.position = spawnLocation;// new Vector2(x, y);
+        transform.position = location;// new Vector2(x, y);
 
-        rb.AddRelativeForce(Random.onUnitSphere * speed);
+        // rb.AddRelativeForce(Random.onUnitSphere * speed);
+        Vector2 direction = (Vector3.zero - transform.position).normalized;
+        rb.AddForce (direction * speed, ForceMode2D.Impulse);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

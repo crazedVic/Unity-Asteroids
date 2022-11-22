@@ -13,6 +13,7 @@ public class ScreenBounds : MonoBehaviour
     public static List<Vector2> spawnLocations = new List<Vector2>();
 
     private float edgeOffset = 0.5f;
+    private float spacing = 0.5f;
 
     private void Awake()
     {
@@ -32,29 +33,28 @@ public class ScreenBounds : MonoBehaviour
     {
 
         // let's do left edge first, x is contant
-        for (float y = 1; y < boxCollider.bounds.max.y; y++)
+        for (float y = boxCollider.bounds.min.y; y < boxCollider.bounds.max.y; y = y + spacing) 
         {
-            spawnLocations.Add(new Vector2(edgeOffset, y));
+            spawnLocations.Add(new Vector2(boxCollider.bounds.min.x + edgeOffset, y));
         }
         // right edge - offset, x is constant
-        for (float y = 1; y < boxCollider.bounds.max.y; y++)
+        for (float y = boxCollider.bounds.min.y; y < boxCollider.bounds.max.y; y = y + spacing)
         {
             spawnLocations.Add(new Vector2(boxCollider.bounds.max.x - edgeOffset, y));
         }
 
         // bottom edge x changes, y is constant
-        for (float x = 1; x < boxCollider.bounds.max.x; x++)
+        for (float x = boxCollider.bounds.min.x; x < boxCollider.bounds.max.x; x = x + spacing)
         {
-            spawnLocations.Add(new Vector2(x, edgeOffset));
+            spawnLocations.Add(new Vector2(x, boxCollider.bounds.min.y + edgeOffset));
         }
 
         // bottom edge x changes, y is constant
-        for (float x = 1; x < boxCollider.bounds.max.x; x++)
+        for (float x = boxCollider.bounds.min.x; x < boxCollider.bounds.max.x; x = x + spacing)
         {
             spawnLocations.Add(new Vector2(x, boxCollider.bounds.max.y - edgeOffset));
         }
 
-        Debug.Log(spawnLocations);
     }
 
     public void UpdateBoundsSize()

@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  asteroidBaseSpeed: 70
+  asteroidBaseSpeed: 1.4
   asteroidsContainer: {fileID: 1025311393}
   boundsCollider: {fileID: 81482131}
   asteroids:
@@ -412,7 +412,7 @@ Transform:
   m_GameObject: {fileID: 1248977356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1528192973}
@@ -492,9 +492,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2420334126308670193, guid: d4a301b28434721489e2c63ac06ddc47, type: 3}
   bulletContainer: {fileID: 4045639}
   bulletSpawner: {fileID: 1528192972}
-  bulletCooldown: 0.57
-  bulletSpeed: 250
-  turnSpeed: 250
+  bulletCooldown: 0.12
+  bulletSpeed: 300
+  turnSpeed: 500
 --- !u!114 &1248977362
 MonoBehaviour:
   m_ObjectHideFlags: 0

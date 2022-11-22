@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +17,8 @@ public class Player : MonoBehaviour
     float teleportOffset = 0.2f;
 
     public BoxCollider2D boundsCollider; //will be set by GameManager when prefab instantiate
+
+    public static System.Action gameOver;
 
     [Header("Bullet Configuration")]
     [SerializeField]
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("asteroid"))
         {
             Debug.Log("Death");
+            gameOver.Invoke();
         }
     }
 

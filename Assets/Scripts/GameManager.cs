@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     int asteroidBaseCount = 2;
 
     [SerializeField]
-    [Range(50.0f, 200.0f)]
-    float asteroidBaseSpeed = 70.0f;
+    [Range(1.0f, 4.0f)]
+    float asteroidBaseSpeed = 2f;
 
     [SerializeField]
     GameObject asteroidsContainer; //empty container that will hold the spawned asteroids
@@ -21,10 +21,24 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] asteroids;
 
+    List<int> spawns = new List<int>();
+
+    private void Awake()
+    {
+        Player.gameOver += ResetGame;
+    }
     // Start is called before the first frame update
     void Start()
     {
         // initially let's instantiate some asteroids on the screen
+        SpawnAsteroids();
+    }
+
+    void ResetGame()
+    {
+        level = 1;
+        spawns.Clear();
+        ClearAsteroids();
         SpawnAsteroids();
     }
 
@@ -41,22 +55,41 @@ public class GameManager : MonoBehaviour
     void LevelCleared()
     {
         // run this when level is cleared of all asteroids
-        level++;
-        SpawnAsteroids();
 
+        level++;
+        spawns.Clear();
+        SpawnAsteroids();
+    }
+
+    void ClearAsteroids()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("asteroid");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
     }
 
     void SpawnAsteroids()
     {
         // based on current level, spawn asteroids
-        int spawnCount = asteroidBaseCount + level;
+        int spawnCount = asteroidBaseCount + (level*2);
         for (int m = 0; m < spawnCount; m++)
         {
             int prefabIndex = Random.Range(0, 3);
+           
+            // get a unique spawnlocation
+            int spawnRoll;
+            do
+            {
+                spawnRoll = Random.Range(0, ScreenBounds.spawnLocations.Count);
+            }
+            while (spawns.Contains(spawnRoll));
+
             // instantiate new asteroid inside asteroidContainer
             GameObject asteroid = Instantiate(asteroids[prefabIndex]);
             asteroid.GetComponent<Asteroid>().boundsCollider = boundsCollider;
-            asteroid.GetComponent<Asteroid>().GetMoving(asteroidBaseSpeed);
+            asteroid.GetComponent<Asteroid>().GetMoving(asteroidBaseSpeed, ScreenBounds.spawnLocations[spawnRoll]);
             asteroid.transform.parent = asteroidsContainer.transform;
           
         }
